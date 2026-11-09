@@ -124,6 +124,7 @@ main{padding-block:10px 40px}
 .item .body{min-width:0;display:grid;gap:3px}
 .item .name{font-weight:700;line-height:1.25}
 .item.on .name{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--gold-fill);text-decoration-thickness:2px}
+.item .num{font-weight:500;font-size:.82rem;color:var(--gold);margin-left:7px;text-decoration:none;display:inline-block}
 .item .hint{font-size:.92rem;color:var(--muted);line-height:1.35}
 .item .where{font-size:.78rem;color:var(--gold);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
@@ -181,7 +182,7 @@ footer p{margin:0;max-width:72ch}
   <div class="toolbar">
     <label class="search" for="q">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
-      <input id="q" type="search" placeholder="Search every category: “boomerang”, “Kakariko”, “night”…" autocomplete="off">
+      <input id="q" type="search" placeholder="Search every category: “boomerang”, “Kakariko”, “#55”…" autocomplete="off">
     </label>
     <div class="seg" role="group" aria-label="Age filter">
       <button type="button" data-age="all" aria-pressed="true">All</button>
@@ -196,7 +197,7 @@ footer p{margin:0;max-width:72ch}
 
 <footer>
   <div class="wrap">
-    <p>Locations follow the original Ocarina of Time layout (N64 and 3DS). A remake may move or add things, so treat the hints as a guide. Tags show the age you need, whether it only appears at night, and the key item it takes.</p>
+    <p>Heart Pieces and Gold Skulltulas follow the Ocarina of Time remake (Switch 2, 2026), checked against IGN's remake guides; the # on each card matches IGN's numbering. Other tabs are based on the original game and may differ in the remake. Tags show the age you need, whether it only appears at night, and the key item it takes.</p>
   </div>
 </footer>
 
@@ -205,59 +206,59 @@ footer p{margin:0;max-width:72ch}
 // Item rows: [id, name, hint, "Tag|Tag"]
 const CATS = [
 {key:"hearts", label:"Hearts", title:"Pieces of Heart & Heart Containers",
- desc:"36 Pieces of Heart and 8 boss Heart Containers. Four pieces make one full heart, for 20 hearts in total.",
+ desc:"36 Pieces of Heart and 8 boss Heart Containers, using the remake's locations. Four pieces make one full heart, for 20 hearts in total. The # matches the order in IGN's remake guide.",
  groups:[
-  ["Lost Woods",[
-   ["poh-lw-skullkid","Skull Kid's Gift","Play Saria's Song for the Skull Kid on the stump near the Kokiri Forest exit.","Child|Saria's Song"],
-   ["poh-lw-memory","Ocarina Memory Game","Copy the Skull Kids' tunes on the stumps deeper in the woods.","Child"]]],
-  ["Hyrule Field",[
-   ["poh-hf-scrub","Deku Scrub Grotto","Bomb the hidden grotto inside the fenced area near the Lake Hylia gate, then buy the piece from the scrub for 10 Rupees.","Bombs"],
-   ["poh-hf-tektite","Tektite Grotto Pool","Hidden grotto on the Gerudo Valley side of the field. Dive to the bottom of the deep pool.","Golden Scale or Iron Boots"]]],
   ["Lon Lon Ranch",[
-   ["poh-llr-silo","Silo Crates","Push the crates in the cow silo at the back of the ranch and crawl through the gap.","Child"]]],
-  ["Castle Town Market",[
-   ["poh-mk-chest","Treasure Chest Shop","Win the Treasure Chest game, open at night. The Lens of Truth makes it trivial.","Night"],
-   ["poh-mk-bowl","Bombchu Bowling","One of the Bombchu Bowling Alley prizes. Keep playing until it shows up.","Child"],
-   ["poh-mk-dog","Richard the Dog","At night, find the white dog in the back alley and walk him home to his owner.","Child|Night"]]],
+   ["poh-llr-silo","Silo Crates","In the crumbling tower in the ranch's southwest corner, slide the milk crates aside and crawl through the gap behind the middle one.","Child",1]]],
   ["Kakariko Village",[
-   ["poh-kak-impa","Impa's House Cow Pen","Crawl into the cow's pen at the back of Impa's house.","Child"],
-   ["poh-kak-windmill","Windmill Ledge","High ledge inside the windmill. Grab it with the Boomerang as a child, or drop onto it as an adult after Dampé's race.",""],
-   ["poh-kak-roof","Man on the Roof","Get onto the rooftop near Impa's house (jump from the watchtower or Hookshot up) and talk to the man.",""],
-   ["poh-kak-gs50","Skulltula House: 50 Tokens","Reward from the cursed family for turning in 50 Gold Skulltula tokens.",""]]],
-  ["Graveyard",[
-   ["poh-gy-tour","Dampé's Gravedigging Tour","Pay Dampé at night and keep digging until a piece turns up.","Child|Night"],
-   ["poh-gy-redead","ReDead Grave","Open the grave with flowers in front, then play Sun's Song inside to make the chest appear.","Sun's Song"],
-   ["poh-gy-ledge","Graveyard Alcove","Plant a Magic Bean in the soft soil as a child, then ride the leaf as an adult (the Longshot works too).","Adult|Magic Bean"],
-   ["poh-gy-race","Dampé's Race Rematch","Race Dampé's ghost through his tomb again and finish in under 60 seconds.","Adult"]]],
-  ["Death Mountain & Goron City",[
-   ["poh-dmt","Above Dodongo's Cavern","On top of the cavern entrance. Drop down onto it from the trail above.",""],
-   ["poh-gc-pot","Goron City Spinning Urn","Light the bottom-floor torches to spin the big urn, then drop a bomb in when it shows the happy face.","Child|Bombs"],
-   ["poh-dmc-wall","Crater Wall Alcove","From the trail entrance to the crater, climb down the wall to the alcove below.",""],
-   ["poh-dmc-volcano","Volcano Summit","Plant a Magic Bean near the warp pad as a child and ride it to the volcano top as an adult. Hover Boots also work.","Adult|Magic Bean"]]],
+   ["poh-kak-roof","Man on the Roof","Carry a Cucco up the hill behind the windmill, glide onto the Potion Shop's blue roof, and talk to the man on the lower roof by the tower.","Child|Cucco",2],
+   ["poh-kak-impa","Impa's House Cow Pen","Ride the owl down from the Death Mountain summit; he drops you on Impa's roof. Hop down onto the cow pen roof behind it. As an adult, Hookshot the vines left of the house.","",11],
+   ["poh-kak-windmill","Windmill Ledge","After Dampé's race, Hookshot out to the passage that leads into the windmill and jump across the moving parts to the high ledge.","Adult|Hookshot",20],
+   ["poh-kak-gs50","Skulltula House: 50 Tokens","Turn in 50 Gold Skulltula tokens to the father in the House of Skulltula.","",27]]],
+  ["Kakariko Graveyard",[
+   ["poh-gy-tour","Dampé's Gravedigging Tour","Pay Dampé at night to dig the mounds. When he hits something heavy, pay a little extra for the prize.","Child|Night|Rupees",3],
+   ["poh-gy-redead","Hidden Grave Chest","Pull back the grave at the far south end of the row below the Royal Tomb and drop in. The big chest holds the piece.","",4],
+   ["poh-gy-ledge","Bean Ledge by the Dead Tree","Plant a Magic Bean in the soft soil by the dead tree on the north side as a child, then ride it up as an adult.","Adult|Magic Bean",19],
+   ["poh-gy-race","Dampé's Race Rematch","Race Dampé's ghost again and finish in under a minute. The Longshot helps on the last staircase.","Adult|Hookshot",21]]],
+  ["Hyrule Castle Town",[
+   ["poh-mk-dog","Richard the Dog","Once the Death Mountain gate is open, find the lady's white dog in the back alley near the Treasure Chest Shop in the evening and walk him home.","Child|Night",5],
+   ["poh-mk-bowl","Bombchu Bowling: Expert Course","Clear the expert course at the Bombchu Bowling Alley.","Child",12],
+   ["poh-mk-chest","Treasure Chest Shop","Use the Lens of Truth to find every key in the Treasure Chest game.","Child|Lens of Truth",33]]],
+  ["Lost Woods",[
+   ["poh-lw-skullkid","Skull Kid's Duet","Go left from the entrance, stand on the small stump and play Saria's Song with the Skull Kid.","Child|Saria's Song",6],
+   ["poh-lw-memory","Skull Kid Memory Game","Follow the music right from the entrance and win the follow-the-tune game three times; the third win pays the piece.","Child",7]]],
+  ["Hyrule Field",[
+   ["poh-hf-password","Password Scrub Grotto","Bomb the cracked stone along the moat just east of the Castle Town gate. Read the fairy writing on a nearby tree as an adult, then come back as a child, say the password and buy the piece for 100 Rupees.","Bombs|Adult then Child|100 Rupees",23],
+   ["poh-hf-chest","Locked Chest near Gerudo Valley","Small chest under a rock outcrop near the Gerudo Valley entrance. Read the fairy writing beside it as an adult, then open it as a child after the Forest Temple.","Adult then Child",24]]],
+  ["Death Mountain",[
+   ["poh-gc-pot","Goron City Spinning Urn","Light the torches around the big urn to spin it, then toss a bomb in when the happy face comes round.","Child|Bombs",8],
+   ["poh-dmc-wall","Crater Wall Alcove","From the crater entrance, run down and right between two rocks, then climb down the mesh to an alcove.","Child",9],
+   ["poh-dmc-scrub","Crater Business Scrub","On a low platform northwest of the entrance, by the blocked bridge. The scrub sells the piece for 100 Rupees.","Child|100 Rupees",10],
+   ["poh-dmt","Dodongo's Cavern Bean Ledge","Plant a Magic Bean in the soft soil at the Dodongo's Cavern entrance as a child, then ride it up as an adult.","Adult|Magic Bean",28],
+   ["poh-dmc-volcano","Volcano Pillar","Warp in with Bolero of Fire as a child and plant a Magic Bean by the Fire Temple, then ride it to the pillar as an adult.","Adult|Magic Bean|Bolero of Fire",29]]],
   ["Zora's River, Domain & Fountain",[
-   ["poh-zr-pillar","River Pillar","On a tall pillar near the river entrance. Hop across or glide in with a Cucco.","Child"],
-   ["poh-zr-ledge","Ledge by the Waterfall","On a ledge near the waterfall leading up to Zora's Domain.","Child"],
-   ["poh-zr-storms","Frogs: Song of Storms","Play Song of Storms for the frogs on the log.","Child|Song of Storms"],
-   ["poh-zr-frogs","Frogs' Ocarina Game","Play every song for the frogs, then win their quick-note game.","Child"],
-   ["poh-zd-torch","Zora's Domain Torches","Light every torch around the domain with a burning Deku Stick to open the chest.","Child|Deku Stick"],
-   ["poh-zf-ice","Fountain Iceberg","On one of the icebergs in the frozen fountain.","Adult"],
-   ["poh-zf-bottom","Fountain Floor","Sink to the bottom of the fountain.","Adult|Iron Boots"],
-   ["poh-ice","Ice Cavern Red Ice","Melt the red ice inside the Ice Cavern with Blue Fire.","Adult|Blue Fire"]]],
+   ["poh-zr-frogledge","Ledge above the Frogs","Glide a Cucco onto the river island, grab the second Cucco from the grotto on its south side, and float from the Sheikah Stone ledge to the piece above the frogs.","Bombs|Cucco",13],
+   ["poh-zr-falls","Platform by the Waterfall","Carry the Cucco from past the Bean Seller up to the Zora's Domain falls and float across to the tiny platform to the northwest.","Bombs|Cucco",14],
+   ["poh-zd-torch","Zora's Domain Torches","Light the torches from the audience chamber down to the bottom with Deku Sticks, including the two braziers behind the waterfall, to make the chest appear.","Deku Stick",15],
+   ["poh-zr-storms","Frogs: Song of Storms","Play Song of Storms for the frogs.","Child|Song of Storms",25],
+   ["poh-zr-frogs","Frogs' Fly Game","Play the six non-warp songs for the frogs, then win their fly-matching game.","Child",26],
+   ["poh-zf-ice","Fountain Iceberg","Hop across the icebergs to the northeast corner of the frozen fountain.","Adult",30],
+   ["poh-zf-bottom","Fountain Floor","Sink to the bottom with the Iron Boots; the piece sits in a ring of rupees. Wear the Zora Tunic.","Adult|Iron Boots",31]]],
   ["Lake Hylia",[
-   ["poh-lh-dive","Lakeside Lab Dive","Dive to the bottom of the lab's pool to win the scientist's challenge.","Golden Scale"],
-   ["poh-lh-roof","Lab Rooftop","On top of the lab. Ride a Magic Bean leaf, or use the Longshot or Scarecrow's Song.","Adult"],
-   ["poh-lh-fish","Fishing Pond (Child)","Beat the pond's record as a child.","Child"]]],
+   ["poh-lh-fish","Fishing Pond (Child)","Land a fish over 40 cm as a child.","Child|Rupees",16],
+   ["poh-lh-roof","Observatory Rooftop","Plant a Magic Bean outside the observatory as a child, then ride it to the roof as an adult and climb the ladder.","Adult|Magic Bean",22],
+   ["poh-lh-dive","Observatory Dive","Dive to the bottom of the scientist's 9 m pool.","Adult|Golden Scale",32]]],
   ["Gerudo Valley & Fortress",[
-   ["poh-gv-waterfall","Valley Waterfall Ledge","On a ledge by the waterfall below the bridge. Glide down with a Cucco.","Child"],
-   ["poh-gv-crate","River Crate","Break the crate by the river at the bottom of the valley.","Child"],
-   ["poh-gf-roof","Fortress Rooftop Chest","Chest on the fortress roof. Reach it with the Hover Boots or Longshot.","Adult"],
-   ["poh-gf-hba","Horseback Archery 1,000","Score 1,000 points at the Gerudo archery range on Epona.","Adult|Epona"]]],
+   ["poh-gv-chest","Chest across the Valley","Grab the Cucco by the bridge and glide across the valley to the big chest on the far wall.","Cucco",17],
+   ["poh-gv-waterfall","Behind the Waterfall","Glide a Cucco down to the alcove at the bottom of the valley and climb the path behind the big waterfall.","Cucco",18],
+   ["poh-gf-roof","Fortress Rooftop Chest","Climb to the southeast rooftops and double back north. At the gap, call the scarecrow and Hookshot over; the chest is on your left.","Adult|Longshot|Scarecrow's Song",34],
+   ["poh-gf-hba","Horseback Archery","Score over 750 points at the Gerudo archery course on Epona.","Adult|Epona|Bow",35]]],
   ["Desert Colossus",[
-   ["poh-col","Colossus Bean Ledge","Plant a Magic Bean here as a child, then ride the leaf as an adult.","Adult|Magic Bean"]]],
+   ["poh-col","Colossus Arch","Plant a Magic Bean as a child (Requiem of Spirit gets you there), then ride it over the stone arch as an adult.","Adult|Magic Bean",36]]],
   ["Boss Heart Containers",[
-   ["hc-gohma","Queen Gohma","Inside the Deku Tree.","Child"],
+   ["hc-gohma","Queen Gohma","Great Deku Tree.","Child"],
    ["hc-kd","King Dodongo","Dodongo's Cavern.","Child"],
-   ["hc-barinade","Barinade","Jabu-Jabu's Belly.","Child"],
+   ["hc-barinade","Barinade","Lord Jabu-Jabu's Belly.","Child"],
    ["hc-pg","Phantom Ganon","Forest Temple.","Adult"],
    ["hc-volvagia","Volvagia","Fire Temple.","Adult"],
    ["hc-morpha","Morpha","Water Temple.","Adult"],
@@ -265,129 +266,134 @@ const CATS = [
    ["hc-twinrova","Twinrova","Spirit Temple.","Adult"]]]
  ]},
 {key:"skulltulas", label:"Gold Skulltulas", title:"Gold Skulltulas",
- desc:"100 tokens: 44 in dungeons and 56 out in the world. Most overworld ones only come out at night, so listen for the rattle. Turn tokens in at the House of Skulltula in Kakariko.",
+ desc:"100 tokens using the remake's locations: 44 in dungeons and 56 out in the world. Outside dungeons most only appear at night, glowing narrow trees hide some (roll into them), and soft soil hides others (drop a bottled bug). The # matches the order in IGN's remake guide.",
  groups:[
-  ["Inside the Deku Tree",[
-   ["gs-dt-compass","Compass Room","Second floor, on the wall of the room with the compass chest.","Child"],
-   ["gs-dt-vines","Basement Vines","Basement, on the vine-covered wall.","Child"],
-   ["gs-dt-gate","Basement Gate","Basement, on the wall behind the bars. Stun it, then pull the token with the Boomerang.","Child"],
-   ["gs-dt-back","Basement Back Room","Past the web-covered tunnels at the back of the basement. Come back with the Boomerang.","Child|Boomerang"]]],
-  ["Dodongo's Cavern",[
-   ["gs-dc-side","Side Room by the Lower Lizalfos","In the side room next to the first Lizalfos fight.",""],
-   ["gs-dc-vines","Vines Above the Stairs","On the vines in the big staircase room.",""],
-   ["gs-dc-alcove","Alcove Above the Stairs","High alcove over the staircase. Boomerang or Hookshot.",""],
-   ["gs-dc-scarecrow","Scarecrow Ledge","Upper ledge in the main room, reached with the Hookshot or Scarecrow's Song.","Adult|Hookshot"],
-   ["gs-dc-back","Back Room","Behind a bombable wall in the back room near the Armos statues.","Bombs"]]],
-  ["Jabu-Jabu's Belly",[
-   ["gs-jj-lower","Basement, Lower","Basement below the first room, low on the wall.","Child|Boomerang"],
-   ["gs-jj-upper","Basement, Upper","Same basement room, higher up on the wall.","Child|Boomerang"],
-   ["gs-jj-switch","Water Switch Room","Room with the water-level switch.","Child"],
-   ["gs-jj-boss","Near the Boss Door","On the wall by the boss room entrance.","Child|Boomerang"]]],
-  ["Forest Temple",[
-   ["gs-fo-first","First Room","High on the wall of the entrance hall.","Adult|Hookshot"],
-   ["gs-fo-lobby","Main Lobby","Up in the main lobby.","Adult|Hookshot"],
-   ["gs-fo-east","East Courtyard","On the vines in the east courtyard.","Adult|Hookshot"],
-   ["gs-fo-west","West Courtyard","High on the wall of the west courtyard.","Adult|Hookshot"],
-   ["gs-fo-basement","Basement","Basement, past the rotating wall.","Adult"]]],
-  ["Fire Temple",[
-   ["gs-fi-sot","Song of Time Room","Move the block with Song of Time to reach it.","Adult|Song of Time"],
-   ["gs-fi-loop","Boss Key Loop","Along the boss-key route on the lower floor.","Adult|Megaton Hammer"],
-   ["gs-fi-maze","Boulder Maze","Behind a bombable wall in the upper boulder maze.","Adult|Bombs"],
-   ["gs-fi-climb","Scarecrow Climb","Near the top of the temple. Call the scarecrow with Scarecrow's Song.","Adult|Scarecrow's Song"],
-   ["gs-fi-top","Scarecrow Top","Right at the top after the scarecrow climb.","Adult|Scarecrow's Song"]]],
-  ["Water Temple",[
-   ["gs-wa-gate","Behind the Gate","Behind a gate on the lower level.","Adult|Hookshot"],
-   ["gs-wa-bk","Near the Boss Key Chest","In the rooms leading to the boss key.","Adult|Longshot"],
-   ["gs-wa-pillar","Central Pillar","Inside the central pillar.","Adult|Iron Boots"],
-   ["gs-wa-fall","Falling Platform Room","Room with the falling platforms.","Adult|Longshot"],
-   ["gs-wa-river","River Room","Near the end of the strong-current river.","Adult|Iron Boots"]]],
-  ["Shadow Temple",[
-   ["gs-sh-single","Single Giant Pot","Break the lone giant pot.","Adult"],
-   ["gs-sh-spikes","Falling Spikes Room","Room with the falling spiked ceiling.","Adult"],
-   ["gs-sh-triple","Triple Giant Pots","Room with three giant pots.","Adult"],
-   ["gs-sh-likelike","Like Like Room","Invisible-wall area guarded by Like Likes.","Adult|Lens of Truth"],
-   ["gs-sh-ship","Near the Ship","By the dock of the boat ride.","Adult|Longshot"]]],
-  ["Spirit Temple",[
-   ["gs-sp-fence","Metal Fence","On the climbable fence on the child side.","Child"],
-   ["gs-sp-sunblock","Hall After the Sun Block Room","Child side, just past the sun-block puzzle.","Child"],
-   ["gs-sp-floor","Sun on Floor Room","Room with the sun emblem on the floor.",""],
-   ["gs-sp-boulder","Boulder Room","Adult side, room with rolling boulders.","Adult|Song of Time"],
-   ["gs-sp-lobby","Statue Hall","Upper ledges of the big statue hall.","Adult|Longshot"]]],
-  ["Bottom of the Well",[
-   ["gs-bw-cage","Like Like Cage","In the Like Like cage.","Child|Lens of Truth"],
-   ["gs-bw-east","East Inner Room","Behind a fake wall on the east side.","Child|Lens of Truth"],
-   ["gs-bw-west","West Inner Room","Behind a fake wall on the west side.","Child|Lens of Truth"]]],
-  ["Ice Cavern",[
-   ["gs-ic-push","Push Block Room","Room with the sliding ice block.","Adult"],
-   ["gs-ic-scythe","Spinning Scythe Room","Room with the spinning ice blade.","Adult"],
-   ["gs-ic-heart","Heart Piece Room","In the room with the Piece of Heart in red ice.","Adult"]]],
   ["Kokiri Forest",[
-   ["gs-kf-kia","Know-It-All House","Back wall of the Know-It-All Brothers' house.","Child|Night"],
-   ["gs-kf-bean","Soft Soil","Drop bugs from a bottle on the soft soil near the shop.","Child|Bugs"],
-   ["gs-kf-twins","House of Twins","High on the wall of the House of Twins.","Adult|Night|Hookshot"]]],
-  ["Lost Woods & Sacred Forest Meadow",[
-   ["gs-lw-bridge","Soft Soil by the Bridge","Drop bugs on the soft soil near the bridge to Hyrule Field.","Child|Bugs"],
-   ["gs-lw-theater","Soft Soil by the Theater","Drop bugs on the soft soil near the Deku Theater.","Child|Bugs"],
-   ["gs-lw-above","Above the Theater","On the ledge above the Deku Theater clearing.","Adult|Night|Magic Bean"],
-   ["gs-sfm","Sacred Forest Meadow","On the maze wall near the Forest Temple steps.","Adult|Night|Hookshot"]]],
+   ["gs-kf-bean","Soft Soil behind the Shop","Drop a bottled bug on the soft soil behind the Kokiri Shop.","Child|Bugs",15],
+   ["gs-kf-kia","Know-It-All House","On the back wall of the Know-It-All Brothers' house by the training area.","Child|Night",16],
+   ["gs-kf-twins","House of Twins","High on the back of the House of Twins, nearest the Deku Tree path.","Adult|Night|Hookshot",46]]],
+  ["Great Deku Tree",[
+   ["gs-dt-compass","Compass Room","3F compass room. Raise the platforms, stay on the left of the middle one and climb to the high ledge.","Child",1],
+   ["gs-dt-vines","Basement Vine Wall","Basement, on the vine wall by the pool you land in.","Child|Slingshot",2],
+   ["gs-dt-gate","Basement Grate","Basement, on the big grate on the north side. Shoot it, then climb the grate.","Child|Slingshot",3],
+   ["gs-dt-back","Gohma Larva Room","B1 room where three Gohma larvae drop. Burn the web in the northwest corner with a lit Deku Stick; it's high on the vines.","Child|Deku Stick|Slingshot",4]]],
   ["Hyrule Field",[
-   ["gs-hf-cow","Cow Grotto","Burn the webs inside the grotto with the cow, near Gerudo Valley.","Fire"],
-   ["gs-hf-kak","Grotto near Kakariko","Bomb open the hidden grotto by the Kakariko stairs; the token is behind webs.","Bombs"]]],
-  ["Castle Town & Hyrule Castle",[
-   ["gs-mk-guard","Market Guard House","Break the crates in the guard house by the drawbridge.","Child"],
-   ["gs-hc-tree","Castle Tree","Roll into the tree on the path up to Hyrule Castle.","Child"],
-   ["gs-hc-storms","Song of Storms Grotto","Play Song of Storms near the castle to open a grotto, then bomb the wall inside.","Child|Song of Storms|Bombs"],
-   ["gs-ogc","Outside Ganon's Castle","On the wall outside Ganon's Castle.","Adult"]]],
+   ["gs-hf-tree","Tree by the Stream","Roll into the glowing tree on the east side of the field, across the stream near the Kokiri Forest exit.","",5],
+   ["gs-hf-cow","Grotto South of Lon Lon Ranch","Bomb the crack in the ground by a Peahat in the woods south of the ranch. It's high on the grotto wall.","Bombs|Boomerang or Hookshot",27],
+   ["gs-hf-kak","Wetland Grotto Crate","Bomb the cracked stone in the southeast wetland. Kill the Skullwalltula inside as a child, then come back as an adult and roll into the shaking crate.","Bombs|Child then Adult",55]]],
+  ["Hyrule Castle Town & Castle",[
+   ["gs-mk-guard","Guard House Crates","Turn right inside the town gate into the guard room and roll into the big crates at the far end.","Child",6],
+   ["gs-hc-tree","Castle Garden Tree","Sneak past the gate guards into the gardens, climb the west wall, and roll into the lone tree by the barrels.","Child",7],
+   ["gs-hc-storms","Song of Storms Grotto","By the tree where Malon slept, play Song of Storms at the propeller plant, then bomb the cracked walls in the grotto.","Child|Song of Storms|Bombs",54],
+   ["gs-ogc","Ganon's Castle Gatehouse","Behind the old gatehouse arch, over the pit, high up.","Adult|Hookshot",45]]],
   ["Lon Lon Ranch",[
-   ["gs-llr-tree","Ranch Tree","Roll into the tree in the ranch yard.","Child"],
-   ["gs-llr-shed","Rain Shed","On the shed wall by the paddock.","Child|Night|Boomerang"],
-   ["gs-llr-window","House Window","On the window of the ranch house.","Child|Night|Boomerang"],
-   ["gs-llr-back","Back Wall","On the back wall of the ranch behind the silo.","Child|Night|Boomerang"]]],
+   ["gs-llr-tree","Tree behind the House","Roll into the tall tree in the yard behind Talon's house.","",8],
+   ["gs-llr-window","House Window","On a window of the main house by the racetrack entrance.","Child|Night|Boomerang",38],
+   ["gs-llr-back","Silo Tower Ledge","Inside the crumbling southwest tower, on the high ledge. Reach it with the Boomerang.","Night|Boomerang",39]]],
   ["Kakariko Village",[
-   ["gs-kak-build","House Under Construction","On the scaffolding of the house being built.","Child|Night"],
-   ["gs-kak-skull","House of Skulltula","On the side of the House of Skulltula.","Child|Night"],
-   ["gs-kak-guard","Guard's House","On the wall of the guard's house near the entrance.","Child|Night"],
-   ["gs-kak-tree","Village Tree","On the tree near the village entrance.","Child|Night"],
-   ["gs-kak-tower","Watchtower","On the watchtower ladder. Knock it down with the Slingshot.","Child|Night"],
-   ["gs-kak-impa","Above Impa's House","On the roof of Impa's house.","Adult|Night|Hookshot"]]],
-  ["Graveyard",[
-   ["gs-gy-wall","Graveyard Wall","On the wall at the back of the graveyard.","Child|Night|Boomerang"],
-   ["gs-gy-bean","Soft Soil","Drop bugs on the soft soil in the graveyard.","Child|Bugs"]]],
-  ["Death Mountain, Goron City & Crater",[
-   ["gs-dmt-bean","Trail Soft Soil","Drop bugs on the soft soil by Dodongo's Cavern.","Child|Bugs"],
-   ["gs-dmt-kak","Rock by the Gate","Bomb the boulder near the gate from Kakariko.","Child|Bombs"],
-   ["gs-dmt-dc","Above Dodongo's Cavern","Smash the rock above the cavern entrance.","Adult|Night|Megaton Hammer"],
-   ["gs-dmt-path","Falling Rocks Path","Smash the rock on the path to the summit.","Adult|Night|Megaton Hammer"],
-   ["gs-gc-maze","Boulder Maze Crate","Break the crate in Goron City's upper boulder maze.","Child|Bombs"],
-   ["gs-gc-center","Center Platform","On the central platform by the big urn.","Adult"],
-   ["gs-dmc-crate","Crater Crate","Break the crate near the crater entrance from the trail.","Child"],
-   ["gs-dmc-bean","Crater Soft Soil","Drop bugs on the soft soil near the Bolero warp pad.","Child|Bugs"]]],
-  ["Zora's River, Domain & Fountain",[
-   ["gs-zr-tree","River Tree","Roll into the tree near the river entrance.","Child"],
-   ["gs-zr-ladder","River Ladder","On the ladder near the waterfall.","Child|Night"],
-   ["gs-zr-grotto","Near the Upper Grottos","On the wall above the river's upper grottos.","Adult|Night|Hookshot"],
-   ["gs-zr-bridge","Above the Bridge","On the wall above the log bridge.","Adult|Night|Hookshot"],
-   ["gs-zd-fall","Frozen Waterfall","On the frozen waterfall in Zora's Domain.","Adult|Night|Hookshot"],
-   ["gs-zf-tree","Fountain Tree","Roll into the tree by the fountain entrance.","Child"],
-   ["gs-zf-log","Above the Log","On the wall above the floating log.","Child|Night|Boomerang"],
-   ["gs-zf-cave","Hidden Cave","Lift the silver boulder and climb into the hidden cave.","Adult|Silver Gauntlets"]]],
+   ["gs-kak-tree","Entrance Tree","Roll into the tall tree at the village entrance.","Child",9],
+   ["gs-kak-skull","House of Skulltula","Left of the House of Skulltula's door.","Child|Night",10],
+   ["gs-kak-build","House Under Construction","High on the brick wall of the building site; climb the scaffolding.","Child|Night",11],
+   ["gs-kak-tower","Watchtower Ladder","On the watchtower ladder. Shoot it down, then climb.","Child|Night|Slingshot",12],
+   ["gs-kak-guard","Behind the Boy's House","Around the back of the house south of the watchtower and Potion Shop.","Child|Night",13],
+   ["gs-kak-impa","Behind Impa's House","Hookshot the vines left of Impa's house to reach the cow pen area behind it.","Adult|Night|Hookshot",44]]],
+  ["Kakariko Graveyard",[
+   ["gs-gy-bean","Soft Soil up the Steps","Up the left-hand steps, past a small tree. Drop a bottled bug.","Child|Bugs",14],
+   ["gs-gy-wall","Behind Dampé's Hut","High on the wall behind Dampé's hut.","Night|Boomerang or Hookshot",40]]],
+  ["Death Mountain Trail",[
+   ["gs-dmt-bean","Dodongo's Cavern Soft Soil","Blow open the cavern with a Bomb Flower, then drop a bug on the soft soil just inside the tunnel.","Child|Goron's Bracelet|Bugs",19],
+   ["gs-dmt-kak","Cracked Wall by the Tektites","Just past the corner from Kakariko, bomb the cracked wall near the red Tektites. Appears day or night.","Bombs",24],
+   ["gs-dmt-path","Rock below the Summit","Head down from the summit toward Goron City and smash the grey rock.","Adult|Night|Megaton Hammer",64],
+   ["gs-dmt-dc","Rock by the Bomb Flower","Outside Goron City, smash the grey rock where the lone Bomb Flower used to be.","Adult|Night|Megaton Hammer",65]]],
+  ["Goron City",[
+   ["gs-gc-maze","Boulder Maze Crate","Bomb through the boulder maze off the entrance tier; it's in a crate near two chests.","Child|Bombs",25],
+   ["gs-gc-center","Center Platform Rock","One level below the top, on the back of the rock under the central platform.","Adult|Night|Hookshot",57]]],
+  ["Dodongo's Cavern",[
+   ["gs-dc-side","East Hall Cracked Wall","First hallway east of the skull hall. Blow the cracked wall with a Baby Dodongo or a bomb.","Bombs",20],
+   ["gs-dc-vines","Mesh Wall above the Stairs","Lower the big staircase with a Bomb Flower chain, climb it, and look back at the mesh wall.","Goron's Bracelet|Slingshot",21],
+   ["gs-dc-alcove","Room with Two Dodongos","2F of the skull hall, far northeast corner. Bomb the cracked wall.","Bombs",22],
+   ["gs-dc-back","Behind the Armos","Push the block to the far wall in the block room, bomb the cracked wall from on top of it, and find it behind an Armos.","Bombs",23],
+   ["gs-dc-scarecrow","Scarecrow Ledge","East hallway, high ledge with gusting wind. Call the scarecrow and Hookshot up.","Adult|Hookshot|Scarecrow's Song",56]]],
+  ["Death Mountain Crater",[
+   ["gs-dmc-crate","Crater Crate","Run straight in and roll into the farther of two crates by a pot on the left.","Child",26],
+   ["gs-dmc-bean","Fire Temple Soft Soil","Warp in with Bolero of Fire as a child and drop a bug on the soft soil by the temple.","Child|Bugs|Bolero of Fire",58]]],
+  ["Zora's River",[
+   ["gs-zr-tree","Bean Seller Soft Soil","Drop a bug on the soft soil right next to the Bean Seller.","Child|Bombs|Bugs",28],
+   ["gs-zr-ladder","Below the Falls","Drop to the base of the Zora's Domain waterfall; it's behind the vines on the central platform.","Child|Night",29],
+   ["gs-zr-grotto","River Island Ledge","Reach the top of the river island (bean leaf or Cucco). It's by the high ledge crossing on the south side.","Adult|Night|Hookshot",66],
+   ["gs-zr-bridge","High Wall by the Falls","At the top of the river, look back west at the high wall.","Adult|Night|Hookshot",67]]],
+  ["Zora's Domain & Fountain",[
+   ["gs-zd-fall","Frozen Waterfall","Left of the stairs to the throne room, next to the frozen waterfall. Aim left from the top of the falls.","Adult|Hookshot",68],
+   ["gs-zf-tree","Fountain Trees","Follow the shallow path south to the patch of land and roll into the tall trees.","Child",32],
+   ["gs-zf-log","Archway Wall","Climb the archway in the water; it's on the far wall.","Child|Night|Boomerang",37],
+   ["gs-zf-cave","Silver Rock Cave","Lift the black rocks near the Great Fairy Fountain and climb to the top of the cave. Lens helps with invisible Skulltulas.","Adult|Silver Gauntlets|Lens of Truth",100]]],
+  ["Lord Jabu-Jabu's Belly",[
+   ["gs-jj-switch","Water Switch Room","B1 north room. Raise the water and climb the vines to the west ledge with the pots.","Child",33],
+   ["gs-jj-lower","Below the Blue Pit","Drop down the blue pit and look north at the wall with the Biri.","Child|Boomerang",34],
+   ["gs-jj-upper","Northwest Corridor Ceiling","On the ceiling of the corridor heading northwest from the blue pit ledge.","Child|Boomerang",35],
+   ["gs-jj-boss","Boss Antechamber Pillar","On the vines on the back of the tall pillar before the boss door.","Child|Boomerang",36]]],
   ["Lake Hylia",[
-   ["gs-lh-bean","Lakeside Soft Soil","Drop bugs on the soft soil next to the lab.","Child|Bugs"],
-   ["gs-lh-lab","Lab Wall","On the side of the Lakeside Laboratory.","Child|Night|Boomerang"],
-   ["gs-lh-island","Small Island","On the small island by the bridges.","Child|Night"],
-   ["gs-lh-crate","Lab Pool Crate","Sink into the lab's pool and break the crate at the bottom.","Adult|Iron Boots|Hookshot"],
-   ["gs-lh-tree","Dead Tree","At the top of the tall dead tree on the island.","Adult|Night|Longshot"]]],
-  ["Gerudo Valley, Fortress & Desert",[
-   ["gs-gv-bridge","Below the Bridge","Under the small bridge near the valley entrance.","Child|Night|Boomerang"],
-   ["gs-gv-bean","Valley Soft Soil","Drop bugs on the soft soil by the river at the valley bottom.","Child|Bugs"],
-   ["gs-gv-tent","Behind the Tent","Behind the carpenters' tent.","Adult|Night"],
-   ["gs-gv-pillar","Rock Pillar","On the rock pillar across the gorge.","Adult|Night|Hookshot"],
-   ["gs-gf-top","Fortress Rooftop","On the top floor of the fortress.","Adult|Night|Hookshot"],
-   ["gs-gf-range","Archery Range","On a target at the horseback archery range.","Adult|Night|Hookshot"],
-   ["gs-wl","Wasteland Building","Inside the stone building halfway across the desert.","Adult|Hookshot"],
-   ["gs-col-bean","Colossus Soft Soil","Drop bugs on the soft soil near the Spirit Temple.","Child|Bugs"],
-   ["gs-col-tree","Colossus Tree","In a tree near the oasis.","Adult|Night|Hookshot"],
-   ["gs-col-hill","Colossus Hill","On the hill. Ride the Magic Bean leaf or use the Longshot.","Adult|Night"]]]
+   ["gs-lh-bean","Observatory Soft Soil","Drop a bug on the soft soil outside the observatory.","Child|Bugs",30],
+   ["gs-lh-island","Southwest Shore Tunnel","New to the remake. Swim from the big tree island to the southwest shore, climb the small ledge and shuffle through the tunnel.","Child",31],
+   ["gs-lh-lab","Observatory Rope Bridge","Start across the rope bridge to the observatory and look back.","Child|Night|Boomerang",43],
+   ["gs-lh-crate","Observatory Pool Crate","Sink to the bottom of the lab pool and roll into the crate.","Adult|Iron Boots|Hookshot",72],
+   ["gs-lh-tree","Big Tree on the Island","Longshot to the vines near the top of the giant tree.","Adult|Night|Longshot",78]]],
+  ["Lost Woods & Sacred Grove",[
+   ["gs-lw-bridge","Soft Soil above the Bridge","Go left to the Skull Kid's grove, then south through the tunnel to the ledge over the Kokiri bridge.","Child|Bugs",17],
+   ["gs-lw-theater","Scrub Meadow Soft Soil","Toward the Goron City shortcut: right to the pool, left, north, left again to the meadow full of scrubs. Soil by the big tree.","Child|Bugs",18],
+   ["gs-lw-above","Hidden Grove Bean Ledge","Right, left (Goron shortcut), left (Zora shortcut), left, left. Plant a bean there as a child, ride it as an adult.","Adult|Magic Bean",47],
+   ["gs-sfm","Sacred Grove","After the Fairy Fountain and ladder shortcut, on the high east wall near the big tree's roots.","Adult|Hookshot",48]]],
+  ["Forest Temple",[
+   ["gs-fo-first","Entrance Tree","Climb the vine tree in the entrance room; it's at the very top.","Adult|Hookshot",49],
+   ["gs-fo-lobby","Lobby by the Blue Window","Go up the north stairs in the main lobby and turn right toward the blue window.","Adult|Hookshot",50],
+   ["gs-fo-west","Northwest Courtyard Balcony","After the Boss Key, drop to 1F and edge south along the balcony over the well courtyard.","Adult|Bow|Hookshot",51],
+   ["gs-fo-east","Northeast Courtyard Scarecrow","Above the northeast courtyard ledge, call the scarecrow at the gust of wind and Hookshot up.","Adult|Bow|Scarecrow's Song",52],
+   ["gs-fo-basement","Basement South Room","Turn around as soon as you reach B1; it's in the small south room past a Skulltula.","Adult|Bow",53]]],
+  ["Fire Temple",[
+   ["gs-fi-sot","Song of Time Block Room","East lava room, northeast high ledge. Move the blue block and go through.","Adult|Song of Time",59],
+   ["gs-fi-maze","Boulder Room Cracked Wall","3F boulder room, north wall. Bomb the crack.","Adult|Bombs",60],
+   ["gs-fi-climb","Scarecrow: 4F Mesh","Call the scarecrow above the boulder-room platforms, Hookshot up to 4F; it's at the top of the mesh.","Adult|Hookshot|Scarecrow's Song",61],
+   ["gs-fi-top","Scarecrow: 5F Circle Room","Same scarecrow route up to 5F; on the inner wall over the lava.","Adult|Hookshot|Scarecrow's Song",62],
+   ["gs-fi-loop","Behind the Statue","Hammer the statue in the entrance hall's lower right, then smash the rock at the back of the room.","Adult|Megaton Hammer",63]]],
+  ["Ice Cavern",[
+   ["gs-ic-scythe","Spinning Scythe Room","First big scythe room, high on the south wall.","Adult|Hookshot",69],
+   ["gs-ic-heart","Behind the Ice Pillar","Melt the red ice to the east, then look behind the pillar by the compass chest.","Adult|Blue Fire|Hookshot",70],
+   ["gs-ic-push","Block Puzzle Room","Melt the red ice to the west; after the block puzzle, look back at the low wall.","Adult|Blue Fire",71]]],
+  ["Water Temple",[
+   ["gs-wa-pillar","Under the Central Pillar","With the water at 2F, go down into B1 under the pillar, Hookshot the green switch and climb the hatch.","Adult|Iron Boots|Hookshot",73],
+   ["gs-wa-gate","East Room Cracked Wall","East 1F room where you met Ruto. Float up to the ledge and bomb the wall.","Adult|Iron Boots|Bombs",74],
+   ["gs-wa-river","River Cavern","In the whirlpool river on 2F. Where it turns south, look back up at the rock outcrop.","Adult|Iron Boots|Longshot",75],
+   ["gs-wa-fall","Central Pillar Ceiling","Raise the water one level inside the pillar room and Longshot to the top; it's on the ceiling.","Adult|Longshot",76],
+   ["gs-wa-bk","Boulder Room before the Boss Key","In the flooded boulder paths north of the central room, look up at the middle pit.","Adult|Iron Boots|Longshot",77]]],
+  ["Bottom of the Well",[
+   ["gs-bw-cage","Like Like Room","Northeast corner door, past the hidden pit; it's on the wall behind the Like Like.","Child|Lens of Truth",79],
+   ["gs-bw-east","Locked Door (Northeast)","Get the key from the hidden opening at the southeast of the center room, then open the northeast locked door.","Child|Lens of Truth",80],
+   ["gs-bw-west","Locked Door (Northwest)","Lower the water, get the key from the coffins on the west side, then open the northwest door.","Child|Lens of Truth",81]]],
+  ["Shadow Temple",[
+   ["gs-sh-single","Invisible Scythe Room","B3, go left (east) over the invisible platforms and clear the room to open the far door.","Adult|Hover Boots|Lens of Truth",82],
+   ["gs-sh-spikes","Falling Spikes Room","B3, go right (west) through the silver rupee door. Use the block past the spikes and look back at the upper wall.","Adult|Lens of Truth",83],
+   ["gs-sh-likelike","Wind Corridor Pit","In the windy corridors to the north, look down the gap before you Hover Boot across.","Adult|Hover Boots",84],
+   ["gs-sh-ship","Cage by the Ship","B4 on top of the cage by the ship. Call the scarecrow and Hookshot over.","Adult|Hookshot|Scarecrow's Song",85],
+   ["gs-sh-triple","Spinning Skulls","After the boat, in the far west room of the invisible maze, bomb the three spinning skulls.","Adult|Bombs",86]]],
+  ["Gerudo Valley",[
+   ["gs-gv-bridge","Under the Plank Bridge","Under the small plank bridge at the valley entrance.","Child|Night|Boomerang",41],
+   ["gs-gv-bean","River Alcove Soft Soil","Glide a Cucco down to the alcove with the Gerudo and her cow and drop a bug in the soil.","Child|Cucco|Bugs",42],
+   ["gs-gv-tent","Behind the Carpenter's Tent","On the ruins behind the carpenter's tent.","Adult|Night|Epona or Longshot",87],
+   ["gs-gv-pillar","Inside the Stone Arch","South side opposite the camp; look up inside the natural stone arch.","Adult|Night|Epona or Longshot",88]]],
+  ["Gerudo Fortress",[
+   ["gs-gf-top","Red Fabric Doorway","High northeast entrance with red fabric, on the wall to its right.","Adult|Night|Longshot",89],
+   ["gs-gf-range","Archery Target","Ride to the northeast corner of the archery course; it's behind the big high target.","Adult|Night|Longshot",90]]],
+  ["Desert",[
+   ["gs-wl","Mirage Desert Ruin","Cross the quicksand, follow the markers to the ruin, and take the ladder down.","Adult|Night|Longshot",91],
+   ["gs-col-tree","Colossus North Cliffs","On the cliff walls in the north where the Guay flock.","Adult|Night|Longshot",92],
+   ["gs-col-bean","Colossus Soft Soil","Drop a bug on the soft soil by the entrance. Plant a Magic Bean here too.","Child|Bugs",93],
+   ["gs-col-hill","Colossus Bean Plateau","Ride the bean leaf to the raised plateau in the northeast.","Adult|Night|Magic Bean",97]]],
+  ["Spirit Temple",[
+   ["gs-sp-fence","Mesh Wall with Keese","Crawl through the northwest tunnel, take the door on the right; it's on the mesh wall.","Child|Boomerang",94],
+   ["gs-sp-sunblock","Statue Room Corner","2F, east into the giant statue room; bottom right by the statue's legs.","Child|Boomerang",95],
+   ["gs-sp-floor","Corridor to the Colossus Arm","3F, southwest sunlight room with Beamos. Enter the south corridor and look back up.","Child|Boomerang",96],
+   ["gs-sp-boulder","Boulder Half-Pipe","Northeast from the entrance hall, in an alcove on the left past the blue block.","Adult|Silver Gauntlets",98],
+   ["gs-sp-lobby","Statue Room Scarecrow","3F statue room, west side. Call the scarecrow in the upper left corner and Hookshot over.","Adult|Longshot|Scarecrow's Song",99]]]
  ]},
 {key:"songs", label:"Songs", title:"Songs",
  desc:"Twelve songs for the ocarina, plus the Scarecrow's Song you compose yourself.",
@@ -548,9 +554,9 @@ const INDEX = {};
 CATS.forEach(c => {
   c.items = [];
   c.groups = c.groups.map(([gname, rows]) => {
-    const items = rows.map(([id,name,hint,tags]) => {
+    const items = rows.map(([id,name,hint,tags,num]) => {
       const t = tags ? tags.split("|") : [];
-      const it = {id,name,hint,tags:t,cat:c.key,group:gname,
+      const it = {id,name,hint,tags:t,num:num||null,cat:c.key,group:gname,
         child:t.includes("Child"), adult:t.includes("Adult")};
       INDEX[id] = it; c.items.push(it); return it;
     });
@@ -617,7 +623,7 @@ function visible(it){
   if(state.age==="adult" && it.child && !it.adult) return false;
   if(state.hide && state.checked.has(it.id)) return false;
   if(state.q){
-    const hay = (it.name+" "+it.hint+" "+it.group+" "+it.tags.join(" ")).toLowerCase();
+    const hay = (it.name+" "+it.hint+" "+it.group+" "+it.tags.join(" ")+(it.num?" #"+it.num:"")).toLowerCase();
     if(!state.q.split(/\s+/).every(w => hay.includes(w))) return false;
   }
   return true;
@@ -634,7 +640,7 @@ function itemHTML(it, showWhere){
     <span class="mark" aria-hidden="true"></span>
     <span class="body">
       ${showWhere?`<span class="where">${esc(it.group)}</span>`:""}
-      <span class="name">${esc(it.name)}</span>
+      <span class="name">${esc(it.name)}${it.num?`<span class="num">#${it.num}</span>`:""}</span>
       <span class="hint">${esc(it.hint)}</span>
       ${tags?`<span class="tags">${tags}</span>`:""}
     </span>

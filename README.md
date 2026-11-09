@@ -27,6 +27,6 @@ Each entry has a hint plus tags for the age needed, night-only, and the key item
 - Search across every category, Child/Adult filter, hide-collected toggle
 - Progress is saved in your browser (localStorage)
 
-Locations follow the original game layout (N64 / 3DS); a remake may differ.
+Heart Pieces and Gold Skulltulas follow the 2026 Switch 2 remake, checked against IGN's remake guides (the # on each card matches their numbering). Other tabs are based on the original game.
 
 It's one static `index.html` with no build step. Open it locally or host it anywhere.
