@@ -197,7 +197,7 @@ footer p{margin:0;max-width:72ch}
 
 <footer>
   <div class="wrap">
-    <p>Heart Pieces and Gold Skulltulas follow the Ocarina of Time remake (Switch 2, 2026), checked against IGN's remake guides; the # on each card matches IGN's numbering. Other tabs are based on the original game and may differ in the remake. Tags show the age you need, whether it only appears at night, and the key item it takes.</p>
+    <p>Built for the Ocarina of Time remake (Switch 2, 2026) and checked against IGN&#39;s remake guides; the # on Heart Pieces and Gold Skulltulas matches IGN&#39;s numbering. The child mask trade and the 40- and 100-token Skulltula rewards follow the original game and are not yet confirmed for the remake. Tags show the age you need, whether it only appears at night, and the key item it takes.</p>
   </div>
 </footer>
 
@@ -396,158 +396,162 @@ const CATS = [
    ["gs-sp-lobby","Statue Room Scarecrow","3F statue room, west side. Call the scarecrow in the upper left corner and Hookshot over.","Adult|Longshot|Scarecrow's Song",99]]]
  ]},
 {key:"songs", label:"Songs", title:"Songs",
- desc:"Twelve songs for the ocarina, plus the Scarecrow's Song you compose yourself.",
+ desc:"13 songs in the remake: six melodies, six warp songs from Sheik, and the Scarecrow's Song you compose yourself.",
  groups:[
   ["Melodies",[
-   ["sg-lullaby","Zelda's Lullaby","Taught by Impa as you leave the Hyrule Castle courtyard.","Child"],
-   ["sg-epona","Epona's Song","Taught by Malon at Lon Lon Ranch.","Child"],
-   ["sg-saria","Saria's Song","Taught by Saria in Sacred Forest Meadow.","Child"],
-   ["sg-sun","Sun's Song","Read the wall in the Royal Family's Tomb under the Graveyard.","Zelda's Lullaby"],
-   ["sg-time","Song of Time","Taught by Zelda at the Hyrule Field drawbridge with the Ocarina of Time.","Child"],
-   ["sg-storms","Song of Storms","Learned from the man in the Kakariko windmill.","Adult"]]],
+   ["sg-lullaby","Zelda's Lullaby","Hyrule Castle, after meeting Zelda.","Child"],
+   ["sg-saria","Saria's Song","Sacred Grove, after meeting Zelda.","Child"],
+   ["sg-epona","Epona's Song","Malon at Lon Lon Ranch.","Child"],
+   ["sg-sun","Sun's Song","Inside the Royal Tomb in Kakariko Graveyard.","Zelda's Lullaby"],
+   ["sg-time","Song of Time","Hyrule Field by Castle Town, once you have all three Spiritual Stones.","Child"],
+   ["sg-storms","Song of Storms","The man in the Kakariko windmill.","Adult"]]],
   ["Warp Songs from Sheik",[
-   ["sg-minuet","Minuet of Forest","Sacred Forest Meadow, on the way to the Forest Temple.","Adult"],
-   ["sg-bolero","Bolero of Fire","Death Mountain Crater, at the crater entrance.","Adult"],
-   ["sg-serenade","Serenade of Water","At the end of the Ice Cavern.","Adult"],
-   ["sg-nocturne","Nocturne of Shadow","Kakariko Village, after three medallions.","Adult"],
-   ["sg-requiem","Requiem of Spirit","Desert Colossus, on arrival.","Adult"],
-   ["sg-prelude","Prelude of Light","Temple of Time, after the Forest Medallion.","Adult"]]],
-  ["Optional",[
-   ["sg-scarecrow","Scarecrow's Song","Play an 8-note tune for Bonooru at Lake Hylia as a child, then play it back to him as an adult.","Child|Adult"]]]
+   ["sg-minuet","Minuet of Forest","Sacred Grove. Warps to the Sacred Grove.","Adult"],
+   ["sg-prelude","Prelude of Light","Temple of Time, after the Forest Temple. Warps to the Temple of Time.","Adult"],
+   ["sg-bolero","Bolero of Fire","Death Mountain Crater. Warps to the crater.","Adult"],
+   ["sg-serenade","Serenade of Water","Ice Cavern. Warps to Lake Hylia.","Adult"],
+   ["sg-nocturne","Nocturne of Shadow","Kakariko Village, after the Water Temple. Warps to the Graveyard.","Adult"],
+   ["sg-requiem","Requiem of Spirit","Evil Desert Colossus. Warps to the Colossus.","Adult"]]],
+  ["Scarecrow",[
+   ["sg-scarecrow","Scarecrow's Song","Compose a tune for the scarecrow at Lake Hylia as a child, then play it back to him as an adult. It summons the scarecrow at whirling straw piles.","Child|Adult"]]]
  ]},
-{key:"upgrades", label:"Upgrades", title:"Capacity & Ability Upgrades",
- desc:"Bigger bags, wallets, strength, scales, magic and defense.",
+{key:"upgrades", label:"Upgrades", title:"Bag Expansions & Upgrades",
+ desc:"The remake's Item Bag Expansions (wallets, Deku bags, bomb bags, quivers), plus strength, scales and the Great Fairy gifts.",
  groups:[
-  ["Bomb Bags",[
-   ["up-bomb1","Bomb Bag (20)","Big chest in Dodongo's Cavern.","Child"],
-   ["up-bomb2","Bigger Bomb Bag (30)","Top prize at Bombchu Bowling.","Child"],
-   ["up-bomb3","Biggest Bomb Bag (40)","Stop the rolling Goron in Goron City with a bomb.","Child|Bombs"]]],
-  ["Bullet Bags",[
-   ["up-seed1","Bullet Bag (40)","Lost Woods target: hit it with the Slingshot from the log.","Child"],
-   ["up-seed2","Biggest Bullet Bag (50)","Perfect score at the Castle Town shooting gallery.","Child"]]],
-  ["Quivers",[
-   ["up-quiver1","Big Quiver (40)","Perfect score at the Kakariko shooting gallery.","Adult"],
-   ["up-quiver2","Biggest Quiver (50)","Score 1,500 points at Gerudo horseback archery.","Adult|Epona"]]],
   ["Wallets",[
-   ["up-wallet1","Adult's Wallet (200)","House of Skulltula reward for 10 tokens.",""],
-   ["up-wallet2","Giant's Wallet (500)","House of Skulltula reward for 30 tokens.",""]]],
-  ["Deku Sticks & Nuts",[
-   ["up-stick1","Deku Stick Capacity (20)","Buy from the Deku Scrub at the Lost Woods bridge to Hyrule Field.","Child"],
-   ["up-stick2","Deku Stick Capacity (30)","Wear the Skull Mask on the Deku Theater stage.","Child|Skull Mask"],
-   ["up-nut1","Deku Nut Capacity (30)","Buy from the Deku Scrub in the Lost Woods grotto on the way to Sacred Forest Meadow.","Child"],
-   ["up-nut2","Deku Nut Capacity (40)","Wear the Mask of Truth on the Deku Theater stage.","Child|Mask of Truth"]]],
+   ["up-wallet1","Adult's Wallet (500)","House of Skulltula reward for 10 tokens. You start with a 200-Rupee wallet.",""],
+   ["up-wallet2","Giant's Wallet (1,000)","House of Skulltula reward for 30 tokens.",""]]],
+  ["Deku-Stick Bag",[
+   ["up-stick1","Bigger Deku-Stick Bag (20)","Lost Woods: go left past the Skull Kid's stump and through the tunnel to the ledge over the bridge. Reflect the Business Scrub's nuts with your shield, then buy it for 40 Rupees.","Child|Deku Shield"],
+   ["up-stick2","Biggest Deku-Stick Bag (30)","Wear the Skull Mask for the scrubs at the Forest Stage. From the Lost Woods entrance: right, left, right, left, left, then the entrance in the grass.","Child|Skull Mask"]]],
+  ["Deku-Nut Bag",[
+   ["up-nut1","Bigger Deku-Nut Bag (30)","Bomb the boulder next to the Sacred Grove entrance and buy it from the left scrub in the grotto for 40 Rupees.","Child|Bombs"],
+   ["up-nut2","Biggest Deku-Nut Bag (40)","Wear the Mask of Truth for the scrubs at the Forest Stage.","Child|Mask of Truth"]]],
+  ["Deku-Seed Bag",[
+   ["up-seed2","Seed Bag: Shooting Gallery","Perfect score at the Castle Town Shooting Gallery. Either seed upgrade can come first (40, then 50).","Child|Slingshot"],
+   ["up-seed1","Seed Bag: Lost Woods Target","Go right from the Lost Woods entrance and hit the hanging bullseye three times in a row.","Child|Slingshot"]]],
+  ["Bomb Bag",[
+   ["up-bomb1","Bomb Bag (20)","Dodongo's Cavern, after the Lizalfos fight.","Child"],
+   ["up-bomb2","Bigger Bomb Bag (30)","Goron City: stop the rolling Goron with a bomb next to his sign in a middle-level tunnel.","Child|Bombs"],
+   ["up-bomb3","Biggest Bomb Bag (40)","Bombchu Bowling's second prize (the advanced course).","Child"]]],
+  ["Quiver",[
+   ["up-quiver1","Bigger Quiver (40)","Hit all 10 targets at the Kakariko Shooting Gallery, the new building by the Cucco pen.","Adult|Bow"],
+   ["up-quiver2","Biggest Quiver (50)","Score 1,400 points at Gerudo horseback archery.","Adult|Epona|Gerudo Pass"]]],
   ["Strength",[
-   ["up-str1","Goron's Bracelet","Darunia's gift after you play Saria's Song for him.","Child"],
-   ["up-str2","Silver Gauntlets","Spirit Temple, child side.","Child"],
-   ["up-str3","Golden Gauntlets","Ganon's Castle, inside the Shadow Trial.","Adult"]]],
+   ["up-str1","Goron Bracelet","Darunia's gift after you play Saria's Song for him. Lets you pick up Bomb Flowers.","Child"],
+   ["up-str2","Silver Gauntlets","Spirit Temple, young Link's half.","Child"],
+   ["up-str3","Golden Gauntlets","Ganondorf's Castle, in the Shadow section.","Adult"]]],
   ["Diving Scales",[
-   ["up-scale1","Silver Scale","Win the diving game at the top of Zora's Domain.","Child"],
-   ["up-scale2","Golden Scale","Beat the fishing pond record as an adult.","Adult"]]],
-  ["Magic & Defense",[
-   ["up-magic1","Magic Meter","Great Fairy at the Death Mountain summit. Bomb the wall to get in.","Bombs"],
-   ["up-magic2","Double Magic","Great Fairy in Death Mountain Crater. Break the wall with the hammer.","Adult|Megaton Hammer"],
-   ["up-def","Double Defense","Great Fairy outside Ganon's Castle.","Adult|Golden Gauntlets"]]]
+   ["up-scale1","Silver Scale","Win the Diving Lesson at the top of the Zora's Domain waterfall by collecting all five scales.","Child"],
+   ["up-scale2","Golden Scale","Catch a big fish at the Lake Hylia Fishing Pond as an adult.","Adult"]]],
+  ["Great Fairy Gifts",[
+   ["up-spin","Gift of Improved Spin","Hyrule Castle Great Fairy. Bomb your way in and offer 50 Rupees. Your spin attack fires a wave of magic.","Bombs|50 Rupees"],
+   ["up-magic2","Gift of Doubled Magic","Death Mountain Crater Great Fairy. Break in with the hammer and offer 200 Rupees.","Adult|Megaton Hammer|200 Rupees"],
+   ["up-def","Gift of Halved Damage","Great Fairy outside Ganondorf's Castle. Lift the golden pillar and offer 500 Rupees.","Adult|Golden Gauntlets|500 Rupees"]]]
  ]},
 {key:"bottles", label:"Bottles", title:"Empty Bottles",
- desc:"Four bottles. Hold fairies, Blue Fire, bugs, fish and Poes.",
+ desc:"Five bottles in the remake, one more than the original. Four come as a child, one as an adult.",
  groups:[
   ["Bottles",[
-   ["bt-cucco","Cucco Lady","Return all seven Cuccos to their pen in Kakariko.","Child"],
-   ["bt-milk","Talon's Cucco Game","Find the three super Cuccos at Lon Lon Ranch. Comes full of Lon Lon Milk.","Child"],
-   ["bt-ruto","Ruto's Letter","At the bottom of Lake Hylia near the Water Temple.","Child|Silver Scale"],
-   ["bt-poe","Big Poe Collector","Bring 10 Big Poes from Hyrule Field to the man in the Market guard house.","Adult|Epona|Bow"]]]
+   ["bt-shop","Potion Shop Bug","New to the remake. On your first visit to Castle Town, help the Potion Shop owner catch the bug loose in his shop.","Child"],
+   ["bt-milk","Talon's Super Cuccos","Find the three Super Cuccos in 30 seconds in the house at Lon Lon Ranch. Comes full of Lon Lon Milk.","Child"],
+   ["bt-cucco","Cucco Lady","Return all seven of her Cuccos to the pen in Kakariko Village.","Child|Cucco"],
+   ["bt-ruto","Ruto's Letter","Lake Hylia, on an underwater platform straight ahead of the shortcut from Zora's Domain. Show the letter to King Zora.","Child|Silver Scale"],
+   ["bt-poe","Poe Collector","Hunt Big Poes in Hyrule Field on Epona (jump the glowing purple obstacles) and sell 5 at the Ghost Shop in ruined Castle Town for 500 points.","Adult|Epona|Bow"]]]
  ]},
-{key:"items", label:"Items", title:"Inventory Items",
- desc:"Everything that goes on your item buttons.",
+{key:"items", label:"Items", title:"Items",
+ desc:"Weapons, tools and spells. In the remake the Ocarina and Lenses of Truth sit on the D-pad instead of the item buttons.",
  groups:[
-  ["Child Items",[
-   ["it-sticks","Deku Sticks","Kokiri Shop, or drop from Deku Babas.","Child"],
-   ["it-nuts","Deku Nuts","Kokiri Shop, or drop from Deku Babas and scrubs.",""],
-   ["it-sling","Fairy Slingshot","Inside the Deku Tree.","Child"],
-   ["it-focarina","Fairy Ocarina","Saria's gift on the bridge out of Kokiri Forest.","Child"],
-   ["it-oot","Ocarina of Time","Zelda throws it into the moat at the Hyrule Field drawbridge.","Child"],
-   ["it-boomerang","Boomerang","Inside Jabu-Jabu's Belly.","Child"],
-   ["it-lens","Lens of Truth","Bottom of the Well.","Child"],
-   ["it-beans","Magic Beans","The bean salesman at the Zora's River entrance.","Child"]]],
-  ["Adult Items",[
-   ["it-bow","Fairy Bow","Forest Temple.","Adult"],
-   ["it-hook","Hookshot","Win Dampé's race in the Graveyard.","Adult"],
+  ["Young Link",[
+   ["it-sticks","Deku Sticks","Defeat Deku Babas while they stand straight up. You start able to carry 10.","Child"],
+   ["it-nuts","Deku Nuts","Hit a Deku Baba in the face as it attacks. You start able to carry 20.","Child"],
+   ["it-sling","Fairy Slingshot","Great Deku Tree.","Child"],
+   ["it-boomerang","Boomerang","Lord Jabu-Jabu's Belly.","Child"],
+   ["it-beans","Magic Beans","The Bean Seller on Zora's River. Stock is limited and the price rises with each one.","Child"]]],
+  ["Ocarinas & Lenses",[
+   ["it-focarina","Fairy Ocarina","Saria gives it to you as you leave Kokiri Forest.","Child"],
+   ["it-oot","Ocarina of Time","Zelda throws it into the Castle Town moat once you have the three Spiritual Stones.","Child"],
+   ["it-lens","Lenses of Truth","Bottom of the Well. Play Song of Storms at the Kakariko windmill as a child to drain it.","Child|Song of Storms"]]],
+  ["Adult Link",[
+   ["it-bow","Fairy Bow","Forest Temple, from the Stalfos in the poison-pool room on 2F.","Adult"],
+   ["it-hook","Hookshot","Win Dampé's race in Kakariko Graveyard. In the remake it also hits eye switches.","Adult"],
    ["it-long","Longshot","Water Temple.","Adult"],
    ["it-hammer","Megaton Hammer","Fire Temple.","Adult"],
-   ["it-fire","Fire Arrows","Shoot the rising sun from the Lake Hylia island once the lake is refilled.","Adult|Bow"],
-   ["it-ice","Ice Arrows","Gerudo Training Ground.","Adult|Gerudo's Card"],
-   ["it-light","Light Arrows","Sheik gives them in the Temple of Time.","Adult"]]],
+   ["it-fire","Fire Arrow","Shoot the rising sun from the center island of Lake Hylia. Easiest after the Water Temple.","Adult|Bow"],
+   ["it-ice","Ice Arrow","Clear the Proving Grounds at Gerudo Fortress.","Adult|Gerudo Pass"],
+   ["it-light","Light Arrow","Zelda gives them in the Temple of Time once you hold all six Medallions.","Adult"]]],
   ["Either Age",[
-   ["it-chu","Bombchus","Bombchu Shop or Bombchu Bowling in the Market.",""]]],
+   ["it-chu","Bombchus","First prize at Bombchu Bowling in Castle Town.",""]]],
   ["Great Fairy Spells",[
-   ["it-din","Din's Fire","Great Fairy near Hyrule Castle. Bomb the boulder.","Child|Bombs"],
-   ["it-farore","Farore's Wind","Great Fairy in Zora's Fountain. Bomb the boulder.","Child|Bombs"],
-   ["it-nayru","Nayru's Love","Great Fairy at the Desert Colossus. Bomb the wall.","Child|Bombs"]]]
+   ["it-din","Din's Fire","Great Fairy at the Death Mountain summit. Bomb the cracked wall, play Zelda's Lullaby and offer 25 Rupees. Also gives your first magic meter.","Child|Bombs|25 Rupees"],
+   ["it-farore","Farore's Wind","Zora's Fountain Great Fairy. Offer 100 Rupees.","100 Rupees"],
+   ["it-nayru","Nayru's Love","Evil Desert Colossus Great Fairy. Offer 300 Rupees.","300 Rupees"]]]
  ]},
 {key:"equipment", label:"Equipment", title:"Equipment",
  desc:"Swords, shields, tunics and boots.",
  groups:[
   ["Swords",[
-   ["eq-ksword","Kokiri Sword","Crawl through the hole in the Kokiri Forest training area.","Child"],
-   ["eq-msword","Master Sword","Temple of Time, once you hold the three Spiritual Stones.",""],
-   ["eq-bsword","Biggoron's Sword","End of the adult trading sequence.","Adult"]]],
+   ["eq-ksword","Kokiri Sword","Kokiri Forest Training Grounds. Time your jumps to the chest on the isolated platform.","Child"],
+   ["eq-msword","Master Sword","Temple of Time, after the three Spiritual Stones and Song of Time at the altar.",""],
+   ["eq-bsword","Biggoron Sword","End of the adult trading quest, \"From a Pocket Egg Comes...\".","Adult"]]],
   ["Shields",[
-   ["eq-dshield","Deku Shield","Kokiri Shop.","Child"],
-   ["eq-hshield","Hylian Shield","Market Bazaar, or inside a grave in Kakariko Graveyard.",""],
-   ["eq-mshield","Mirror Shield","Spirit Temple.","Adult"]]],
+   ["eq-dshield","Deku Shield","Kokiri Forest shop, 40 Rupees. Burns if it touches fire.","Child"],
+   ["eq-hshield","Hylian Shield","Free in one of the Kakariko Graveyard grottos as a child, or 80 Rupees in Castle Town (60 if you showed Zelda's Letter to the Kakariko guard).",""],
+   ["eq-mshield","Mirror Shield","Spirit Temple, adult Link's half.","Adult"]]],
   ["Tunics",[
-   ["eq-gtunic","Goron Tunic","Stop Link the Goron in Goron City as an adult.","Adult"],
-   ["eq-ztunic","Zora Tunic","Thaw King Zora with Blue Fire.","Adult|Blue Fire"]]],
+   ["eq-gtunic","Goron Tunic","Stop the rolling Goron named Link with a bomb as an adult and talk to him. Or buy it in Goron City for 600 Rupees.","Adult|Bombs"],
+   ["eq-ztunic","Zora Tunic","Melt the red ice around King Zora with Blue Fire. Or buy it in Zora's Domain for 600 Rupees.","Adult|Blue Fire"]]],
   ["Boots",[
-   ["eq-iboots","Iron Boots","Ice Cavern.","Adult"],
+   ["eq-iboots","Iron Boots","Ice Cavern, off Zora's Fountain.","Adult"],
    ["eq-hboots","Hover Boots","Shadow Temple.","Adult"]]]
  ]},
 {key:"quest", label:"Quest", title:"Quest Status",
- desc:"Spiritual Stones, Medallions, and the other quest status items.",
+ desc:"Spiritual Stones, Medallions, and the other key quest rewards.",
  groups:[
   ["Spiritual Stones",[
-   ["qs-emerald","Kokiri's Emerald","Defeat Queen Gohma inside the Deku Tree.","Child"],
-   ["qs-ruby","Goron's Ruby","Defeat King Dodongo in Dodongo's Cavern.","Child"],
-   ["qs-sapphire","Zora's Sapphire","Defeat Barinade in Jabu-Jabu's Belly.","Child"]]],
+   ["qs-emerald","Kokiri Emerald","Clear the Great Deku Tree.","Child"],
+   ["qs-ruby","Goron Ruby","Clear Dodongo's Cavern.","Child"],
+   ["qs-sapphire","Zora Sapphire","Clear Lord Jabu-Jabu's Belly.","Child"]]],
   ["Medallions",[
-   ["qs-light","Light Medallion","Given by Rauru in the Chamber of Sages.","Adult"],
+   ["qs-light","Light Medallion","Received when you pull the Master Sword.","Adult"],
    ["qs-forest","Forest Medallion","Forest Temple.","Adult"],
    ["qs-fire","Fire Medallion","Fire Temple.","Adult"],
    ["qs-water","Water Medallion","Water Temple.","Adult"],
    ["qs-shadow","Shadow Medallion","Shadow Temple.","Adult"],
    ["qs-spirit","Spirit Medallion","Spirit Temple.","Adult"]]],
   ["Other",[
-   ["qs-agony","Stone of Agony","House of Skulltula reward for 20 tokens.",""],
-   ["qs-card","Gerudo's Card","Free all four carpenters in Gerudo's Fortress.","Adult"]]]
+   ["qs-agony","Echo Gem","House of Skulltula reward for 20 tokens. Replaces the Stone of Agony: when equipped it pings near a Gold Skulltula.",""],
+   ["qs-card","Gerudo Pass","Free all the carpenters at Gerudo Fortress and impress the captain. Opens the Proving Grounds and horseback archery.","Adult"],
+   ["qs-epona","Epona","Beat Ingo in the horse race at Lon Lon Ranch as an adult.","Adult|Epona's Song"]]]
  ]},
 {key:"trading", label:"Trading", title:"Trading Sequences",
- desc:"Two chains: the child mask trade that ends with the Mask of Truth, and the adult trade that ends with Biggoron's Sword.",
+ desc:"The adult trade, \"From a Pocket Egg Comes...\", follows IGN's remake guide. It needs Epona and King Zora freed from the ice. The child mask trade still follows the original game.",
  groups:[
+  ["Adult: Biggoron Sword",[
+   ["ta-pegg","Pocket Egg","From the Cucco Lady in Kakariko. It hatches at dawn; play Sun's Song to speed it up.","Adult"],
+   ["ta-pcucco","Pocket Cucco","Wake Talon, asleep under the stairs in the red-roofed house facing the village entrance, then take it back to the Cucco Lady.","Adult"],
+   ["ta-cojiro","Cojiro","The Cucco Lady's blue Cucco. Show it to her brother, asleep by the tall stump down the first left in the Lost Woods.","Adult"],
+   ["ta-mushroom","Odd Mushroom","4-minute timer, no warp songs. Take it to Granny's Cauldron, out the side door behind the Kakariko Potion Shop.","Adult|Timed"],
+   ["ta-potion","Odd Poultice","Take it back to the same spot in the Lost Woods and give it to Fado.","Adult"],
+   ["ta-saw","Poacher's Saw","Take it to the Master Craftsman by the carpenter's tent in Gerudo Valley. Epona can jump the broken bridge.","Adult|Epona"],
+   ["ta-broken","Broken Goron Sword","Take it to Biggoron at the Death Mountain summit.","Adult"],
+   ["ta-presc","Prescription","Take it to King Zora.","Adult"],
+   ["ta-frog","Eyeball Frog","2.5-minute timer. Take it to the scientist at the Lakeside Laboratory.","Adult|Timed"],
+   ["ta-drops","Specialty Eye Drops","3.5-minute timer. Rush them up Death Mountain to Biggoron.","Adult|Timed"],
+   ["ta-claim","Biggoron Receipt","Wait three days (Sun's Song helps), then trade it to Biggoron for the sword.","Adult"]]],
   ["Child: Masks",[
    ["tc-egg","Weird Egg","Malon gives it outside Hyrule Castle.","Child"],
    ["tc-cucco","Cucco","Hatches from the Weird Egg at dawn. Use it to wake Talon.","Child"],
-   ["tc-letter","Zelda's Letter","From Zelda in the castle courtyard.","Child"],
-   ["tc-keaton","Keaton Mask","Borrow from the Happy Mask Shop; sell to the Kakariko gate guard.","Child"],
-   ["tc-skull","Skull Mask","Sell to the Skull Kid in the Lost Woods.","Child"],
-   ["tc-spooky","Spooky Mask","Sell to the boy in the Graveyard.","Child"],
-   ["tc-bunny","Bunny Hood","Sell to the running man in Hyrule Field.","Child"],
-   ["tc-truth","Mask of Truth","Unlocked at the Happy Mask Shop after selling the other four.","Child"]]],
-  ["Adult: Biggoron's Sword",[
-   ["ta-pegg","Pocket Egg","From the Cucco lady in Kakariko.","Adult"],
-   ["ta-pcucco","Pocket Cucco","Hatches from the Pocket Egg at dawn. Wake Talon in Kakariko with it.","Adult"],
-   ["ta-cojiro","Cojiro","The Cucco lady trades it for the Pocket Cucco.","Adult"],
-   ["ta-mushroom","Odd Mushroom","From the sleeping man in the Lost Woods.","Adult"],
-   ["ta-potion","Odd Potion","Kakariko's potion shop, round the back.","Adult"],
-   ["ta-saw","Poacher's Saw","From Fado in the Lost Woods.","Adult"],
-   ["ta-broken","Broken Goron's Sword","From the carpenter boss in Gerudo Valley.","Adult"],
-   ["ta-presc","Prescription","From Biggoron at the Death Mountain summit.","Adult"],
-   ["ta-frog","Eyeball Frog","From King Zora.","Adult"],
-   ["ta-drops","World's Finest Eye Drops","From the scientist at Lake Hylia. Hurry back before the timer runs out.","Adult"],
-   ["ta-claim","Claim Check","From Biggoron. Wait three days, then trade it for the sword.","Adult"]]]
+   ["tc-letter","Zelda's Letter","From Zelda after you meet her at Hyrule Castle. Show it to the Kakariko gate guard.","Child"],
+   ["tc-keaton","Keaton Mask","Borrow it from the Happy Mask Shop and sell it to the Kakariko gate guard.","Child"],
+   ["tc-skull","Skull Mask","Sell it to the Skull Kid in the Lost Woods.","Child"],
+   ["tc-spooky","Spooky Mask","Sell it to the boy in the Graveyard.","Child"],
+   ["tc-bunny","Bunny Hood","Sell it to the running man in Hyrule Field.","Child"],
+   ["tc-truth","Mask of Truth","Unlocked at the Happy Mask Shop after you sell the other four.","Child"]]]
  ]}
 ];
 
-const TOKEN_REWARDS = [[10,"Adult's Wallet"],[20,"Stone of Agony"],[30,"Giant's Wallet"],[40,"Bombchus"],[50,"Piece of Heart"],[100,"Huge Rupee"]];
+const TOKEN_REWARDS = [[10,"Adult's Wallet"],[20,"Echo Gem"],[30,"Giant's Wallet"],[40,"Bombchus"],[50,"Piece of Heart"],[100,"Huge Rupee"]];
 
 /* ---------- Index ---------- */
 const INDEX = {};
