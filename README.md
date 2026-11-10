@@ -33,7 +33,7 @@ It's one static `index.html` with no build step. Open it locally or host it anyw
 
 ## Cross-device sync (Google sign-in)
 
-Sync is off until `firebase-config.js` has a config. To turn it on:
+Sync is on: the site uses the `oot-checklist` Firebase project. To point it at a different project:
 
 1. Create a free project at https://console.firebase.google.com (Analytics not needed).
 2. **Authentication → Sign-in method:** enable **Google**.
