@@ -8,6 +8,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="cloud.js"></script>
 </head>
 <body>
 <style>
@@ -60,6 +65,12 @@ button{font:inherit;color:inherit}
 .status[data-s="saving"] .dot,.status[data-s="connecting"] .dot{background:var(--gold-fill)}
 .status[data-s="unreachable"] .dot,.status[data-s="error"] .dot,.status[data-s="readonly"] .dot{background:var(--heart)}
 
+.account{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:12px;font-size:.95rem}
+.signin{border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);border-radius:8px;padding:9px 14px;font-weight:700;cursor:pointer}
+.signin:disabled{opacity:.6;cursor:progress}
+.linkbtn{border:0;background:none;color:var(--accent);cursor:pointer;padding:4px 2px;font-weight:500;text-decoration:underline}
+#who{color:var(--ink);font-weight:500}
+.acct-msg{flex-basis:100%;margin:0;color:var(--heart);font-size:.9rem}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 16px;display:grid;gap:18px}
 .panel h3{font-size:1rem;letter-spacing:.04em;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .panel h3 small{font-family:var(--f-body);font-size:.88rem;color:var(--muted);letter-spacing:0}
@@ -161,6 +172,12 @@ footer p{margin:0;max-width:72ch}
       <div class="overall"><span class="pct" id="pct">0%</span><span class="of" id="of">0 of 0 collected</span></div>
       <div class="bar"><i id="bar"></i></div>
       <div class="status" id="status" data-s="local" role="status"><span class="dot"></span><span id="statusText">Saved in this browser.</span></div>
+      <div class="account" id="account" hidden>
+        <button type="button" class="signin" id="signin">Sign in with Google</button>
+        <span id="who" hidden></span>
+        <button type="button" class="linkbtn" id="signout" hidden>Sign out</button>
+        <p class="acct-msg" id="acctMsg" hidden></p>
+      </div>
     </div>
     <div class="panel">
       <div>
@@ -767,48 +784,124 @@ function routeFromHash(){
 }
 window.addEventListener("hashchange", () => { routeFromHash(); renderTabs(); renderMain(); });
 
-/* ---------- Saving to the viewer's account (db capability) ---------- */
+/* ---------- Saving progress to an account ----------
+   Two possible backends, same flow:
+   - claude.ai artifact: the db capability, keyed by the viewer's claude.ai id.
+   - Hosted copy (e.g. GitHub Pages): window.ootCloud from cloud.js (Google sign-in + Firestore).
+   Without either, progress stays in this browser only. */
 const STATUS = {
   browser:"Progress is saved in this browser.",
   local:"Saved in this browser only. Sign in to claude.ai to keep progress on your account.",
+  signedout:"Saved in this browser only. Sign in with Google to sync across your devices.",
   connecting:"Loading your saved progress…",
   synced:"Progress saved to your account.",
   saving:"Saving…",
   unreachable:"Can't reach your saved progress right now. Changes are kept in this browser.",
-  error:"Account saving stopped. Changes are kept in this browser.",
+  error:"Account saving stopped. Changes are kept in this browser. Reload to try again.",
   readonly:"This view can't save to your account. Changes are kept in this browser."
 };
 function setStatus(s){ $("#status").dataset.s = s; $("#statusText").textContent = STATUS[s]; }
 
-let ref = null, dirty = false, writing = false, again = false, writeTimer = null, migrated = false;
+const SYNC_KEY = "oot-checklist-synced-uid";
+function syncedUid(){ try{ return localStorage.getItem(SYNC_KEY); }catch(e){ return null; } }
+function markSynced(uid){ try{ localStorage.setItem(SYNC_KEY, uid); }catch(e){} }
+
+let backend = null, dirty = false, writing = false, again = false, writeTimer = null;
 function queueWrite(delay = 700){
-  if(!ref) return;
+  if(!backend) return;
   dirty = true; setStatus("saving");
   clearTimeout(writeTimer);
   writeTimer = setTimeout(flush, delay);
 }
 async function flush(){
-  if(!ref){ dirty = false; return; }
+  if(!backend){ dirty = false; return; }
   if(writing){ again = true; return; }
   writing = true;
+  const target = backend;
   const body = {v:1, checked:[...state.checked]};
   try{
-    try{ await ref.set(body); }
+    try{ await target.save(body); }
     catch(e){
-      if(e && e.code === "unavailable"){ await new Promise(r => setTimeout(r, 800 + Math.random()*800)); await ref.set(body); }
+      if(e && e.code === "unavailable"){ await new Promise(r => setTimeout(r, 800 + Math.random()*800)); await target.save(body); }
       else throw e;
     }
   }catch(e){
-    ref = null; dirty = false; writing = false;
-    setStatus(e && e.code === "invalid_argument" ? "readonly" : "error");
+    writing = false; dirty = false;
+    if(backend === target){ backend = null; setStatus(e && e.code === "invalid_argument" ? "readonly" : "error"); }
     return;
   }
   writing = false;
   if(again){ again = false; flush(); return; }
-  dirty = false; setStatus("synced");
+  dirty = false;
+  if(backend === target) setStatus("synced");
 }
 
+function applyRemote(ids){
+  const next = new Set(ids);
+  const same = next.size === state.checked.size && [...next].every(id => state.checked.has(id));
+  if(!same){ state.checked = next; saveLocal(); renderAll(); }
+}
+
+// snap: {exists, checked (array|undefined), fromCache, pending}
+function handleRemote(uid, snap, confirmed){
+  if(dirty || writing || snap.pending) return;
+  const remote = snap.exists && Array.isArray(snap.checked) ? snap.checked.filter(id => INDEX[id]) : null;
+  const firstTime = syncedUid() !== uid;
+  if(!confirmed){ if(remote && !firstTime) applyRemote(remote); return; }
+  if(firstTime){
+    // First sync in this browser: keep anything ticked here before signing in.
+    markSynced(uid);
+    const union = new Set([...(remote || []), ...state.checked]);
+    applyRemote([...union]);
+    if(!remote || union.size !== remote.length){ queueWrite(0); return; }
+  } else if(remote){
+    applyRemote(remote);
+  } else if(state.checked.size){
+    queueWrite(0); return;
+  }
+  setStatus("synced");
+}
+
+function watchBackend(uid, subscribe){
+  let confirmed = false;
+  setStatus("connecting");
+  const timer = setTimeout(() => { if(!confirmed) setStatus("unreachable"); }, 10000);
+  return subscribe(snap => {
+    if(!snap.fromCache && !confirmed){ confirmed = true; clearTimeout(timer); }
+    handleRemote(uid, snap, confirmed);
+  }, () => {
+    clearTimeout(timer); backend = null; setStatus("error");
+  });
+}
+
+/* Google sign-in (hosted copy) */
+function initCloud(cloud){
+  const acct = $("#account");
+  acct.hidden = false;
+  let unsub = null;
+  $("#signin").addEventListener("click", async () => {
+    $("#signin").disabled = true;
+    try{ await cloud.signIn(); }
+    catch(e){ $("#acctMsg").textContent = "Sign-in didn't finish. " + (e && e.message ? e.message : "Try again."); $("#acctMsg").hidden = false; }
+    finally{ $("#signin").disabled = false; }
+  });
+  $("#signout").addEventListener("click", () => { cloud.signOut(); });
+  cloud.onAuth(user => {
+    if(unsub){ try{ unsub(); }catch(e){} unsub = null; }
+    clearTimeout(writeTimer); backend = null; dirty = false; again = false;
+    $("#acctMsg").hidden = true;
+    $("#signin").hidden = !!user;
+    $("#who").hidden = !user; $("#signout").hidden = !user;
+    if(!user){ setStatus("signedout"); return; }
+    $("#who").textContent = "Signed in as " + (user.name || "you");
+    backend = {save: body => cloud.save(user.uid, body)};
+    unsub = watchBackend(user.uid, (next, err) => cloud.watch(user.uid, next, err));
+  });
+}
+
+/* claude.ai account (artifact) */
 async function initSync(){
+  if(window.ootCloud){ initCloud(window.ootCloud); return; }
   if(!window.claude || typeof window.claude.use !== "function"){ setStatus("browser"); return; }
   let dbNs = null, userNs = null, uid = null;
   try{
@@ -816,30 +909,13 @@ async function initSync(){
     uid = userNs ? await userNs.id() : null;
   }catch(e){}
   if(!dbNs || !uid){ setStatus("local"); return; }
+  let ref;
   try{ ref = dbNs.doc("data/users/" + uid + "/progress"); }catch(e){ setStatus("local"); return; }
-  setStatus("connecting");
-  let confirmed = false;
-  const timer = setTimeout(() => { if(!confirmed) setStatus("unreachable"); }, 10000);
-  ref.onSnapshot(snap => {
-    if(!snap.metadata.fromCache && !confirmed){ confirmed = true; clearTimeout(timer); }
-    if(snap.exists){
-      if(!dirty && !writing && !snap.metadata.hasPendingWrites){
-        const arr = snap.data().checked;
-        if(Array.isArray(arr)){
-          const next = new Set(arr.filter(id => INDEX[id]));
-          const same = next.size === state.checked.size && [...next].every(id => state.checked.has(id));
-          if(!same){ state.checked = next; saveLocal(); renderAll(); }
-        }
-      }
-    } else if(confirmed && !migrated){
-      migrated = true;
-      if(state.checked.size) queueWrite(0);
-    }
-    if(confirmed && !dirty && !writing) setStatus("synced");
-  }, err => {
-    clearTimeout(timer); ref = null;
-    setStatus("error");
-  });
+  backend = {save: body => ref.set(body)};
+  watchBackend(uid, (next, err) => ref.onSnapshot(s => {
+    const d = s.exists ? s.data() : null;
+    next({exists:s.exists, checked:d && d.checked, fromCache:s.metadata.fromCache, pending:s.metadata.hasPendingWrites});
+  }, err));
 }
 
 /* ---------- Boot ---------- */
