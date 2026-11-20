@@ -43,7 +43,8 @@
       }, err);
     },
     save: function (uid, body) {
-      return docRef(uid).set({ v: body.v, checked: body.checked, updated: firebase.firestore.FieldValue.serverTimestamp() });
+      // merge: the DK Bananza checklist keeps its progress in the same document's "dkb" field
+      return docRef(uid).set({ v: body.v, checked: body.checked, updated: firebase.firestore.FieldValue.serverTimestamp() }, { merge: true });
     }
   };
 })();
